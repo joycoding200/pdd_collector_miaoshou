@@ -32,6 +32,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) ;
     white-space: nowrap ;
     overflow: hidden ;
+    justify-content: center ;
 }
 
 .panel-inner {
@@ -49,7 +50,7 @@
 
 /* 激活后仅微调 */
 .panel-container.activated .panel-inner {
-    padding: 6px 15px ;
+    padding: 0 15px ;
     border-bottom: none ;
 }
 
