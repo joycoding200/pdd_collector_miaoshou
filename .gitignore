@@ -12,3 +12,12 @@ logs/
 
 # IDE
 .idea/
+
+# Playwright 测试配置
+.playwright-profile/
+
+# 测试文件和截图
+check_now.py
+check_*.py
+*.png
+*.tgz

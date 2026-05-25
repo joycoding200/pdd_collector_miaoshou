@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>拼多多采集助手 - 激活管理</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">拼多多采集助手</div>
+
+        <div id="activationPanel">
+            <div id="statusDisplay" class="status inactive">未激活</div>
+
+            <div id="inactiveSection">
+                <p>请输入激活码激活插件：</p>
+                <input type="text" id="activationCode" placeholder="输入激活码">
+                <button id="activateBtn">激活插件</button>
+            </div>
+
+            <div id="activeSection" style="display: none;">
+                <p>插件已激活</p>
+                <div id="activationInfo"></div>
+                <button id="verifyBtn">验证激活状态</button>
+                <button id="deactivateBtn" class="warning">解除激活</button>
+                <div class="info">解除激活后可在其他设备使用</div>
+            </div>
+        </div>
+
+        <div id="message" style="margin-top: 10px;"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
