@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>多多采集助手</title>
+    <link rel="stylesheet" href="panel.css">
+    <style>
+        body, html {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            background-color: transparent !important;
+            overflow: hidden !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+<div id="pdd-collector-panel" class="panel-container">
+    <button class="close-btn" id="closePanelBtn" title="关闭面板">×</button>
+    <div class="panel-inner">
+        <!-- 左侧标题区域 -->
+        <div class="panel-header">
+            <svg class="collector-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                <path d="M21 18v2H3v-2h18zM13 3v2H5v2h8v2l4-4-4-4z" opacity="0.8"/>
+            </svg>
+            <div class="panel-title">
+                <span class="title-main">多多采集助手</span>
+                <span class="title-sub" id="activation-status-display">检查激活状态...</span>
+            </div>
+        </div>
+
+        <!-- 右侧操作区域 -->
+        <div class="panel-content" id="panel-content-area">
+            <div class="panel-actions">
+                <button class="collect-btn" id="startCollectBtn" disabled>开始采集</button>
+                <button class="export-btn" id="exportDataBtn" disabled>数据导出</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 激活容器（默认显示） -->
+    <div id="pdd-activation-container" class="activation-container">
+        <div class="activation-content">
+            <!-- 钥匙图标 -->
+            <div class="activation-icon">
+                <span>🔑</span>
+            </div>
+
+            <!-- 标题 -->
+            <h2 class="activation-title">插件未激活</h2>
+
+            <!-- 描述 -->
+            <p class="activation-description">
+                请输入36位激活码解锁<br>
+            </p>
+
+            <!-- 激活码输入框 -->
+            <div class="activation-input-container">
+                <input type="text" id="panel-activation-code"
+                       maxlength="36"
+                       placeholder="请输入36位激活码">
+            </div>
+
+            <!-- 激活按钮 -->
+            <button id="panel-activate-btn">🔓 立即激活</button>
+
+            <!-- 状态消息区 -->
+            <div id="activation-msg" class="activation-message"></div>
+
+            <!-- 底部提示 -->
+            <div class="activation-footer">
+                ✨ 激活后立即生效 · 无需刷新页面<br>
+                💡 激活后自动保存设备信息，更换设备需重新激活
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="panel.js"></script>
+</body>
+</html>

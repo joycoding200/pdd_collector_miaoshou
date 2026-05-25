@@ -3,8 +3,8 @@
 /* 主面板样式 - 兼顾未激活和激活状态 */
 .panel-container {
     position: fixed ;
-    bottom: 20px ;
-    right: 20px ;
+    bottom: 0 ;
+    right: 0 ;
     width: 100% ;
     height: 100% ;
     background: rgba(245, 245, 245, 0.98) ;
@@ -17,8 +17,7 @@
     flex-direction: column ;
     color: #333333 ;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif ;
-    overflow-y: auto ;
-    overflow-x: hidden ;
+    overflow: hidden ;
     transition: all 0.3s ease ;
     box-sizing: border-box ;
 }
@@ -36,26 +35,21 @@
 }
 
 .panel-inner {
-    flex: 1 ;
+    flex: 0 0 auto ;
     display: flex ;
-    flex-direction: column ;
-    position: relative ;
-    width: 100% ;
-    height: 100% ;
-}
-
-/* 激活后变为横向布局 */
-.panel-container.activated .panel-inner {
     flex-direction: row ;
     align-items: center ;
     justify-content: space-between ;
-    padding: 0 ;
-    border-bottom: none ;
+    position: relative ;
+    width: 100% ;
+    padding: 8px 15px ;
+    border-bottom: 1px solid #e0e0e0 ;
 }
 
-/* 非激活态：面板内部上区和激活表单之间的分割线 */
-.panel-container:not(.activated) .panel-inner {
-    border-bottom: 1px solid #e0e0e0 ;
+/* 激活后仅微调 */
+.panel-container.activated .panel-inner {
+    padding: 0 15px ;
+    border-bottom: none ;
 }
 
 /* 激活容器 - 未激活状态下完全可见 */
@@ -234,8 +228,12 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) ;
 }
 
-/* 关闭按钮 */
+/* 关闭按钮 - 固定在面板右上角 */
 .close-btn {
+    position: absolute ;
+    top: 0 ;
+    right: 0 ;
+    z-index: 10 ;
     background: rgba(0, 0, 0, 0.05) ;
     color: #666666 ;
     width: 26px ;
@@ -246,7 +244,6 @@
     align-items: center ;
     justify-content: center ;
     cursor: pointer ;
-    margin-left: 8px ;
     transition: all 0.2s ;
     border: 1px solid rgba(0, 0, 0, 0.05) ;
 }
@@ -268,8 +265,8 @@
     align-items: center ;
     justify-content: space-between ; /* 使用space-between均匀分布 */
     height: 100% ; /* 设置为100%高度 */
-    min-height: 400px ; /* 确保最小高度 */
-    padding: 10px 0 ; /* 添加一些上下内边距 */
+    min-height: 320px ;
+    padding: 10px 0 ;
 }
 
 .activation-icon {
@@ -375,16 +372,16 @@
 /* 响应式调整 */
 @media (max-height: 700px) {
     .panel-container {
-        bottom: 20px ;
-        right: 20px ;
-        width: 380px ;
+        bottom: 0 ;
+        right: 0 ;
+        width: 100% ;
         min-height: auto ;
     }
 
     .panel-container.activated {
         height: 55px ;
         min-height: auto ;
-        padding: 0 12px ;
+        padding: 0 8px ;
     }
 
     .activation-container {

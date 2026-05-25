@@ -909,9 +909,9 @@ function adjustIframeSize(iframe, data) {
         iframe.style.borderRadius = '10px';
     } else {
         iframe.style.width = '400px';
-        iframe.style.height = '500px';
-        iframe.style.top = '80px';
-        iframe.style.bottom = 'auto';
+        iframe.style.height = '550px';
+        iframe.style.top = 'auto';
+        iframe.style.bottom = '20px';
         iframe.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
         iframe.style.borderRadius = '12px';
     }
