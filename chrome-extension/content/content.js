@@ -1425,7 +1425,7 @@ const simulateHumanBehavior = async () => {
         behavior: 'smooth'
     });
 
-    await humanWait(800, 1500);
+    await humanWait(300, 600);
 
     // 轻微回滚，模拟真实浏览
     window.scrollBy({
@@ -1433,7 +1433,7 @@ const simulateHumanBehavior = async () => {
         behavior: 'smooth'
     });
 
-    await humanWait(500, 1000);
+    await humanWait(200, 400);
 };
 
 //改进版 - 模拟人工浏览
@@ -1530,7 +1530,7 @@ const grabProductTitle = async () => {
 
             // 继续模拟浏览行为
             await simulateHumanBehavior();
-            await humanWait(800, 1200);
+            await humanWait(300, 500);
 
             titleElement = findTitleElement();
             retryCount++;
@@ -1540,7 +1540,7 @@ const grabProductTitle = async () => {
         if (titleElement) {
             // 确保元素可见
             titleElement.scrollIntoView({behavior: 'smooth', block: 'center'});
-            await humanWait(300, 600);
+            await humanWait(100, 200);
 
             // 模拟鼠标悬停
             const mouseOverEvent = new MouseEvent('mouseover', {
@@ -1549,7 +1549,7 @@ const grabProductTitle = async () => {
                 cancelable: true
             });
             titleElement.dispatchEvent(mouseOverEvent);
-            await humanWait(200, 400);
+            await humanWait(100, 200);
 
             // 获取标题文本
             let titleText = titleElement.textContent.trim();
@@ -1914,12 +1914,12 @@ const traverseAllSkuCombinationsSimple = async (dialog, specifications) => {
             }
 
             // 等待第一个选项生效
-            await humanWait(800, 1200);
+            await humanWait(300, 500);
             // 新增：重置第二个规格为首个可用选项
             const firstAvailableSecondOption = secondSpec.values.find(v => !v.isDisabled);
             if (firstAvailableSecondOption) {
                 await clickSkuOption(firstAvailableSecondOption.element);
-                await humanWait(500, 800);
+                await humanWait(200, 300);
             }
 
             // 获取更新后的第二个规格可用选项（选择第一个规格后，第二个规格的可用选项可能变化）
@@ -1937,7 +1937,7 @@ const traverseAllSkuCombinationsSimple = async (dialog, specifications) => {
 
                 if (secondClicked) {
                     // 等待SKU信息更新
-                    await humanWait(1000, 1500);
+                    await humanWait(400, 600);
 
                     // 获取SKU信息
                     const skuInfo = getSkuImageAndPrice(dialog);
@@ -1960,7 +1960,7 @@ const traverseAllSkuCombinationsSimple = async (dialog, specifications) => {
 
                     // 如果不是最后一个选项，等待一下
                     if (j < secondOptions.length - 1) {
-                        await humanWait(500, 800);
+                        await humanWait(200, 300);
                     }
                 } else {
                     console.error(`  无法选中 ${secondSpec.key}: ${secondOption.text}`);
@@ -1970,7 +1970,7 @@ const traverseAllSkuCombinationsSimple = async (dialog, specifications) => {
             // 如果不是第一个规格的最后一个选项，等待一下准备下一个选项
             if (i < firstOptions.length - 1) {
                 console.log(`\n  准备切换到 ${firstSpec.key} 的下一个选项...`);
-                await humanWait(800, 1200);
+                await humanWait(300, 500);
             }
         }
     } else {
@@ -1983,7 +1983,7 @@ const traverseAllSkuCombinationsSimple = async (dialog, specifications) => {
 
             console.log(`选择 ${spec.key}: ${option.text}`);
             await clickSkuOption(option.element);
-            await humanWait(800, 1200);
+            await humanWait(400, 600);
 
             const skuInfo = getSkuImageAndPrice(dialog);
             const skuData = {
@@ -2283,7 +2283,7 @@ const clickSkuOption = async (element) => {
         if (!isVisible) {
             console.log('滚动到元素位置...');
             element.scrollIntoView({behavior: 'smooth', block: 'center'});
-            await humanWait(300, 500);
+            await humanWait(100, 200);
         }
 
         // 模拟鼠标悬停
@@ -2293,7 +2293,7 @@ const clickSkuOption = async (element) => {
             cancelable: true
         });
         element.dispatchEvent(mouseOverEvent);
-        await humanWait(100, 300);
+        await humanWait(50, 100);
 
         // 点击前检查是否已经选中
         const beforeClass = element.getAttribute('class') || '';
@@ -2313,8 +2313,8 @@ const clickSkuOption = async (element) => {
         // 点击元素
         element.click();
 
-        // 等待SKU信息更新（拼多多通常需要300-800ms更新价格和图片）
-        await humanWait(500, 800);
+        // 等待SKU信息更新
+        await humanWait(200, 400);
         // 检查是否选中
         const afterClass = element.getAttribute('class') || '';
 
@@ -2588,7 +2588,7 @@ const clickButton = async (button, methodName) => {
 
     // 滚动到按钮位置
     button.scrollIntoView({behavior: 'smooth', block: 'center'});
-    await humanWait(500, 800);
+    await humanWait(200, 300);
 
     // 模拟鼠标移动到按钮上
     const mouseOverEvent = new MouseEvent('mouseover', {
@@ -2597,13 +2597,13 @@ const clickButton = async (button, methodName) => {
         cancelable: true
     });
     button.dispatchEvent(mouseOverEvent);
-    await humanWait(300, 600);
+    await humanWait(100, 200);
 
     // 模拟点击
     button.click();
 
     // 等待弹窗出现
-    await humanWait(1000, 1500);
+    await humanWait(500, 800);
     return true;
 };
 
@@ -2620,12 +2620,12 @@ const waitForSkuDialog = async (maxRetries = 2) => {
             console.log('✅ SKU弹窗已出现');
 
             // 确保弹窗完全加载
-            await humanWait(800, 1200);
+            await humanWait(400, 600);
             return dialog;
         }
 
         console.log(`等待弹窗... (${i + 1}/${maxRetries})`);
-        await humanWait(800, 1200);
+        await humanWait(400, 600);
 
         // 偶尔滚动一下模拟真实操作
         if (i % 2 === 0) {
@@ -2651,7 +2651,7 @@ const closeSkuDialog = async (dialog) => {
 
         if (closeButton) {
             closeButton.click();
-            await humanWait(500, 800);
+            await humanWait(200, 400);
             console.log('✅ SKU弹窗已关闭');
         } else {
             console.log('⚠️ 未找到关闭按钮，尝试其他方式关闭');
@@ -2724,14 +2724,14 @@ const getAllLazyImages = {
             // 轻微滚动触发更多加载
             window.scrollBy({top: 100, behavior: 'smooth'});
 
-            // 1.5秒后断开observer
+            // 500ms后断开observer
             setTimeout(() => {
                 if (this.observer) {
                     this.observer.disconnect();
                     this.observer = null;
                 }
                 resolve();
-            }, 1500);
+            }, 500);
         });
     },
 
