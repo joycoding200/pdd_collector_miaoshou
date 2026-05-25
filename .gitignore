@@ -22,3 +22,4 @@ check_*.py
 *.png
 *.tgz
 CLAUDE.md
+activation-server/
