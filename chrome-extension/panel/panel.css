@@ -1,0 +1,413 @@
+/* panel.css - 面板样式 */
+
+/* 主面板样式 - 兼顾未激活和激活状态 */
+.panel-container {
+    position: fixed ;
+    bottom: 20px ;
+    right: 20px ;
+    width: 100% ;
+    height: 100% ;
+    background: #f5f5f5 ;
+    border: none ;
+    border-radius: 12px ;
+    z-index: 2147483645 ;
+    display: flex ;
+    flex-direction: column ;
+    color: #333333 ;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif ;
+    overflow: hidden ;
+    transition: all 0.3s ease ;
+    box-sizing: border-box ; /* 重要：包含内边距和边框 */
+}
+
+/* 激活后的横向横条样式 */
+.panel-container.activated {
+    width: auto ;
+    min-width: 450px ;
+    height: 60px ;
+    padding: 0 15px ;
+    background: #f5f5f5 ;
+    white-space: nowrap ;
+}
+
+.panel-inner {
+    flex: 1 ;
+    display: flex ;
+    flex-direction: column ;
+    position: relative ;
+    width: 100% ;
+    height: 100% ;
+}
+
+/* 激活后变为横向布局 */
+.panel-container.activated .panel-inner {
+    flex-direction: row ;
+    align-items: center ;
+    justify-content: space-between ;
+    padding: 0 ;
+    border-bottom: none ;
+}
+
+/* 非激活态：面板内部上区和激活表单之间的分割线 */
+.panel-container:not(.activated) .panel-inner {
+    border-bottom: 1px solid #e0e0e0 ;
+}
+
+/* 激活容器 - 未激活状态下完全可见 */
+.activation-container {
+    position: relative ;
+    top: 0 ;
+    left: 0 ;
+    width: 100% ;
+    height: 100% ;
+    background: #f5f5f5 ;
+    border-radius: 12px ;
+    padding: 30px 20px ;
+    box-sizing: border-box ;
+    z-index: 2147483646 ;
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+    justify-content: center ;
+    opacity: 1 ;
+    visibility: visible ;
+}
+
+/* 激活后隐藏激活容器 */
+.panel-container.activated .activation-container {
+    display: none ;
+    opacity: 0 ;
+    visibility: hidden ;
+}
+
+/* 默认隐藏功能区域 */
+#panel-content-area {
+    display: none ;
+}
+
+/* 激活后显示功能区域 */
+.panel-container.activated #panel-content-area {
+    display: flex ;
+    flex-direction: row ;
+    align-items: center ;
+    gap: 10px ;
+    opacity: 1 ;
+    visibility: visible ;
+    animation: fadeIn 0.3s ease ;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 面板头部 */
+.panel-header {
+    display: flex ;
+    align-items: center ;
+    padding: 10px 14px ;
+    border-bottom: none ;
+}
+
+/* 激活后标题区域样式 */
+.panel-container.activated .panel-header {
+    padding: 0 ;
+    margin-right: 15px ;
+    min-width: 160px ; /* 增加标题区域最小宽度 */
+    flex-shrink: 0 ; /* 防止标题区域被压缩 */
+}
+
+.collector-icon {
+    width: 24px ;
+    height: 24px ;
+    margin-right: 10px ;
+    color: #ff9900 ;
+}
+
+/* 激活后图标调整 */
+.panel-container.activated .collector-icon {
+    width: 20px ;
+    height: 20px ;
+    margin-right: 8px ;
+}
+
+.panel-title {
+    display: flex ;
+    flex-direction: column ;
+}
+
+/* 激活后标题保持纵向但更紧凑 */
+.panel-container.activated .panel-title {
+    flex-direction: column ;
+    align-items: flex-start ;
+    gap: 2px ;
+}
+
+.title-main {
+    font-size: 18px ;
+    font-weight: 600 ;
+    color: #333333 ;
+}
+
+/* 激活后主标题 */
+.panel-container.activated .title-main {
+    font-size: 14px ;
+    font-weight: 700 ;
+    color: #333333 ;
+}
+
+.title-sub {
+    font-size: 13px ;
+    color: #666666 ;
+    margin-top: 4px ;
+}
+
+/* 激活后副标题 */
+.panel-container.activated .title-sub {
+    margin-top: 0 ;
+    font-size: 11px ;
+    color: #27ae60 ;
+    font-weight: 500 ;
+}
+
+/* 面板内容 - 按钮区域 */
+.panel-content {
+    padding: 0 ;
+    flex: 0 ;
+    display: flex ;
+    flex-direction: row ;
+    align-items: center ;
+    gap: 8px ;
+}
+
+.panel-actions {
+    display: flex ;
+    flex-direction: row ;
+    align-items: center ;
+    gap: 8px ;
+}
+
+/* 按钮样式 */
+.collect-btn,
+.export-btn {
+    padding: 8px 14px ;
+    border: none ;
+    border-radius: 6px ;
+    font-size: 12px ;
+    font-weight: 600 ;
+    cursor: pointer ;
+    transition: all 0.2s ;
+    text-align: center ;
+    min-width: 70px ;
+    color: white ;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) ;
+}
+
+.collect-btn {
+    background: linear-gradient(135deg, #ff9900, #ff6600) ;
+}
+
+.export-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9) ;
+}
+
+.collect-btn:disabled,
+.export-btn:disabled {
+    opacity: 0.5 ;
+    cursor: not-allowed ;
+}
+
+.collect-btn:not(:disabled):hover,
+.export-btn:not(:disabled):hover {
+    transform: translateY(-1px) ;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) ;
+}
+
+.collect-btn:not(:disabled):active,
+.export-btn:not(:disabled):active {
+    transform: translateY(0) ;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) ;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    background: rgba(0, 0, 0, 0.05) ;
+    color: #666666 ;
+    width: 26px ;
+    height: 26px ;
+    border-radius: 50% ;
+    font-size: 16px ;
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+    cursor: pointer ;
+    margin-left: 8px ;
+    transition: all 0.2s ;
+    border: 1px solid rgba(0, 0, 0, 0.05) ;
+}
+
+.close-btn:hover {
+    background: rgba(0, 0, 0, 0.1) ;
+    color: #333333 ;
+    transform: scale(1.1) ;
+}
+
+/* 激活相关样式 - 未激活状态完全可见 */
+.activation-content {
+    width: 100% ;
+    max-width: 360px ;
+    text-align: center ;
+    box-sizing: border-box ;
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+    justify-content: space-between ; /* 使用space-between均匀分布 */
+    height: 100% ; /* 设置为100%高度 */
+    min-height: 400px ; /* 确保最小高度 */
+    padding: 10px 0 ; /* 添加一些上下内边距 */
+}
+
+.activation-icon {
+    width: 60px ;
+    height: 60px ;
+    background: linear-gradient(135deg, #ff9900, #ff6600) ;
+    border-radius: 50% ;
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+    margin: 0 auto 20px ;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.35) ;
+}
+.activation-icon span {
+    font-size: 30px ;
+    font-weight: bold ;
+}
+
+.activation-title {
+    font-size: 20px ;
+    font-weight: 700 ;
+    color: #ff9900 ;
+    margin: 0 0 10px ;
+    letter-spacing: 0.5px ;
+}
+
+.activation-description {
+    color: #666666 ;
+    font-size: 14px ;
+    line-height: 1.5 ;
+    margin: 0 0 25px ;
+    padding: 0 10px ;
+}
+
+.activation-input-container {
+    position: relative ;
+    margin-bottom: 20px ;
+    width: 100% ;
+}
+
+#panel-activation-code {
+    width: 100% ;
+    padding: 14px 16px ;
+    font-size: 16px ;
+    text-align: center ;
+    background: rgba(255, 255, 255, 0.9) ;
+    border: 2px solid #ddd ;
+    border-radius: 10px ;
+    color: #333 ;
+    letter-spacing: 1px ;
+    outline: none ;
+    transition: all 0.3s ;
+    font-family: Consolas, Monaco, monospace ;
+    box-sizing: border-box ;
+}
+
+#panel-activation-code:focus {
+    border-color: #ff9900 ;
+    box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1) ;
+}
+
+#panel-activate-btn {
+    width: 100% ;
+    padding: 14px ;
+    background: linear-gradient(135deg, #ff9900, #ff6600) ;
+    color: white ;
+    border: none ;
+    border-radius: 10px ;
+    font-size: 16px ;
+    font-weight: bold ;
+    cursor: pointer ;
+    transition: all 0.3s ;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.35) ;
+    letter-spacing: 1px ;
+}
+
+#panel-activate-btn:hover {
+    transform: translateY(-2px) ;
+    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4) ;
+}
+
+#activation-msg {
+    min-height: 24px ;
+    margin-top: 15px ;
+    font-weight: 500 ;
+    font-size: 13px ;
+    padding: 5px 0 ;
+    color: #333 ;
+}
+
+.activation-footer {
+    margin-top: auto ;
+    padding-top: 10px ;
+    border-top: 1px solid #ddd ;
+    color: #666 ;
+    font-size: 12px ;
+    line-height: 1.4 ;
+    width: 100% ;
+    box-sizing: border-box ;
+    text-align: center ;
+}
+
+/* 响应式调整 */
+@media (max-height: 700px) {
+    .panel-container {
+        bottom: 10px ;
+        right: 10px ;
+        width: 380px ;
+        min-height: 450px ;
+    }
+
+    .panel-container.activated {
+        height: 55px ;
+        padding: 0 12px ;
+    }
+
+    .activation-container {
+        padding: 24px 20px ;
+    }
+
+    .collect-btn,
+    .export-btn {
+        padding: 7px 12px ;
+        font-size: 11px ;
+    }
+
+    .close-btn {
+        width: 24px ;
+        height: 24px ;
+        font-size: 14px ;
+    }
+}
+
+/* 在小屏幕上进一步调整 */
+@media (max-width: 480px) {
+    .panel-container {
+        width: 95% ;
+        right: 2.5% ;
+        bottom: 10px ;
+    }
+
+    .panel-container.activated {
+        width: auto ;
+        min-width: 300px ;
+    }
+}
