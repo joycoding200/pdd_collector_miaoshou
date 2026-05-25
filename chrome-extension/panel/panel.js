@@ -102,6 +102,13 @@ document.addEventListener('DOMContentLoaded', function () {
         currentActivationStatus = status;
         if (trial) currentTrialStatus = trial;
 
+        // 强制面板填满 iframe
+        if (panel) {
+            panel.style.right = '0px';
+            panel.style.bottom = '0px';
+            panel.style.width = '100%';
+        }
+
         const hasTrial = !status.isActivated && currentTrialStatus.trialCount > 0;
         const trialExhausted = !status.isActivated && currentTrialStatus.trialCount <= 0;
 
