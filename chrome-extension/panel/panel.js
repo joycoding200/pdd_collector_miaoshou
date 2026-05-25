@@ -146,16 +146,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 更新激活容器和功能区域
         if (status.isActivated || hasTrial) {
-            // 工具栏模式：紧凑横条，填满 iframe
+            // 工具栏模式：紧凑横条
             if (activationContainer) activationContainer.style.display = 'none';
             if (contentArea) contentArea.style.display = 'block';
-            if (panel) {
-                panel.classList.add('activated');
-                panel.style.width = '100%';
-                panel.style.height = '60px';
-                panel.style.right = '0px';
-                panel.style.bottom = '0px';
-            }
+            if (panel) { panel.classList.add('activated'); panel.style.setProperty('height', '60px', 'important'); panel.style.setProperty('min-height', '0', 'important'); }
             if (!isCollecting) {
                 if (startCollectBtn) startCollectBtn.disabled = false;
                 if (exportDataBtn) exportDataBtn.disabled = false;
@@ -166,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // 采集进行中：保持工具栏
                 if (activationContainer) activationContainer.style.display = 'none';
                 if (contentArea) contentArea.style.display = 'block';
-                if (panel) { panel.classList.add('activated'); panel.style.width = '100%'; panel.style.height = '60px'; panel.style.right = '0px'; panel.style.bottom = '0px'; }
+                if (panel) { panel.classList.add('activated'); panel.style.setProperty('height', '60px', 'important'); panel.style.setProperty('min-height', '0', 'important'); }
                 if (startCollectBtn) startCollectBtn.disabled = true;
                 if (exportDataBtn) exportDataBtn.disabled = false;
                 if (startCollectBtn) startCollectBtn.textContent = '采集中...';
@@ -179,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     activationContainer.style.pointerEvents = 'auto';
                 }
                 if (contentArea) contentArea.style.display = 'block';
-                if (panel) { panel.classList.remove('activated'); panel.style.width = '100%'; panel.style.height = '100%'; panel.style.right = '0px'; panel.style.bottom = '0px'; }
+                if (panel) { panel.classList.remove('activated'); panel.style.removeProperty('height'); panel.style.removeProperty('min-height'); }
                 if (startCollectBtn) { startCollectBtn.disabled = true; startCollectBtn.textContent = '开始采集'; }
                 if (exportDataBtn) exportDataBtn.disabled = false;
             }
@@ -191,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 activationContainer.style.pointerEvents = 'auto';
             }
             if (contentArea) contentArea.style.display = 'none';
-            if (panel) { panel.classList.remove('activated'); panel.style.width = '100%'; panel.style.height = '100%'; panel.style.right = '0px'; panel.style.bottom = '0px'; }
+            if (panel) { panel.classList.remove('activated'); panel.style.removeProperty('height'); panel.style.removeProperty('min-height'); }
             if (startCollectBtn) startCollectBtn.disabled = true;
             if (exportDataBtn) exportDataBtn.disabled = true;
             if (activationCodeInput) { setTimeout(function(){activationCodeInput.focus();},100); }

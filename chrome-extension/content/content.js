@@ -664,15 +664,16 @@ async function injectPanel() {
     iframe.src = chrome.runtime.getURL('panel/panel.html');
     iframe.style.cssText = `
         position: fixed;
-        bottom: 20px;
+        top: 80px;
         right: 20px;
         width: 400px;
         height: 500px;
         border: none;
         z-index: 2147483645;
         border-radius: 12px;
-        background: #f5f5f5;
-        background-color: #f5f5f5;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        background: transparent;
+        background-color: transparent;
     `;
 
     document.body.appendChild(iframe);
@@ -899,21 +900,19 @@ async function handleActivation(activationCode, iframe) {
 
 function adjustIframeSize(iframe, data) {
     const mode = data.mode || (data.isActivated ? 'activated' : 'inactive');
-    // 统一在右下角，向上展开；统一不透明背景
-    iframe.style.top = 'auto';
-    iframe.style.bottom = '20px';
-    iframe.style.background = '#f5f5f5';
-    iframe.style.backgroundColor = '#f5f5f5';
-
     if (mode === 'activated' || mode === 'trial') {
         iframe.style.width = '400px';
         iframe.style.height = '60px';
-        iframe.style.boxShadow = 'none';
+        iframe.style.top = 'auto';
+        iframe.style.bottom = '20px';
+        iframe.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
         iframe.style.borderRadius = '10px';
     } else {
         iframe.style.width = '400px';
         iframe.style.height = '500px';
-        iframe.style.boxShadow = 'none';
+        iframe.style.top = '80px';
+        iframe.style.bottom = 'auto';
+        iframe.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
         iframe.style.borderRadius = '12px';
     }
 }
